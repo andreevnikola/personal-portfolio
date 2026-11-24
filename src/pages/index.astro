@@ -52,19 +52,22 @@ const year = new Date().getFullYear();
 
     <main id="top">
       <section class="hero">
-        <img
-          class="cover"
-          src="/images/cover.jpg"
-          alt="Nikola reading from notes at a microphone on stage, a flag behind him"
-          width="2000"
-          height="1150"
-        />
+        <picture>
+          <source media="(max-width: 600px)" srcset="/images/cover-portrait.jpg" width="920" height="1150" />
+          <img
+            class="cover"
+            src="/images/cover-wide.jpg"
+            alt="Nikola reading from notes at a microphone on stage, a flag behind him"
+            width="2000"
+            height="1000"
+          />
+        </picture>
         <h1>
           <span>Nikola</span>
           <span>Andreev</span>
         </h1>
         <div class="lede">
-          <img class="portrait" src="/images/portrait.jpg" alt="Portrait of Nikola at a microphone" width="892" height="892" />
+          <img class="portrait" src="/images/avatar.jpg" alt="Portrait of Nikola" width="320" height="320" />
           <p>
             I run student projects, speak on stage, and guide trips from the Arctic to the desert.
           </p>
@@ -191,9 +194,7 @@ const year = new Date().getFullYear();
 
   .cover {
     width: 100%;
-    height: clamp(260px, 56vh, 560px);
-    object-fit: cover;
-    object-position: 50% 62%;
+    height: auto;
     border-radius: 14px;
   }
   h1 {
@@ -219,7 +220,7 @@ const year = new Date().getFullYear();
     flex-shrink: 0;
     border-radius: 50%;
     object-fit: cover;
-    object-position: 50% 25%;
+    object-position: center;
   }
   .lede p {
     margin: 0;
@@ -350,20 +351,33 @@ const year = new Date().getFullYear();
   }
 
   @media (max-width: 900px) {
-    .embeds {
-      grid-template-columns: 1fr;
-      max-width: 440px;
-    }
-  }
-  @media (max-width: 720px) {
     .split {
       grid-template-columns: 1fr;
     }
     .split .side {
       position: static;
     }
+    .embeds {
+      display: flex;
+      gap: 1rem;
+      margin: 0 calc(var(--gutter) * -1);
+      padding: 0 var(--gutter) 0.5rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-padding: 0 var(--gutter);
+      -webkit-overflow-scrolling: touch;
+    }
+    .embeds li {
+      flex: 0 0 min(80vw, 340px);
+      scroll-snap-align: start;
+    }
+  }
+  @media (max-width: 720px) {
     .lede p {
       font-size: 1.1rem;
+    }
+    .col:last-child {
+      margin-top: 2rem;
     }
   }
   @media (prefers-reduced-motion: reduce) {

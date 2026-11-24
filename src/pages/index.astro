@@ -1,22 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro';
 
-const name = 'Nikola Andreev';
 const email = 'nikola@aandreev.me';
 
-const nav = [
-  { href: '#tours', label: 'Tours' },
-  { href: '#instagram', label: 'Instagram' },
-  { href: '#contact', label: 'Contact' },
-];
-
-const instagram = [
-  {
-    handle: 'andreevnikolaa',
-    title: 'Personal',
-    note: 'Everyday life, trips and moments.',
-    embed: false,
-  },
+const projects = [
   {
     handle: 'interactclub.philippopol',
     title: 'Interact Club Philippopol',
@@ -34,480 +21,354 @@ const instagram = [
   },
 ];
 
-const tours = [
-  { src: '/images/tour-group.jpg', alt: 'Tour group posing in a snowy pine forest', cls: 'wide' },
-  { src: '/images/tour-aurora.jpg', alt: 'Two people standing under the northern lights', cls: 'tall' },
-  { src: '/images/tour-reindeer.jpg', alt: 'Feeding a reindeer at a snowy fence', cls: 'tall' },
-  { src: '/images/tour-desert.jpg', alt: 'Quad bikes on desert dunes', cls: 'wide' },
+const columns = [
+  [
+    { src: '/images/tour-group.jpg', alt: 'A tour group posing in a snowy pine forest', w: 948, h: 826 },
+    { src: '/images/tour-reindeer.jpg', alt: 'Feeding a reindeer at a snowy fence', w: 768, h: 1024 },
+  ],
+  [
+    { src: '/images/tour-aurora.jpg', alt: 'Two people standing under the northern lights', w: 768, h: 1024 },
+    { src: '/images/tour-desert.jpg', alt: 'Quad bikes on desert dunes', w: 816, h: 960 },
+  ],
 ];
 
-const links = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/nikola-andreev-736a5b3a3/' },
-  { label: 'Instagram', href: 'https://www.instagram.com/andreevnikolaa/' },
-];
 const year = new Date().getFullYear();
 ---
 
-<Layout title={name} description={`${name} — personal website.`}>
-  <div class="notice" role="note">
-    <span class="dot" aria-hidden="true"></span>
-    <p>
-      This page isn't finished yet and isn't meant to be shared publicly. <em>Thanks, Claude.</em>
-    </p>
-  </div>
+<Layout title="Nikola Andreev" description="Nikola Andreev: student projects, stages and trips.">
+  <p class="notice" role="note">
+    This page isn't finished and isn't meant to be shared yet. Thanks, Claude.
+  </p>
 
-  <header class="top">
-    <a class="logo" href="#top">NA</a>
-    <nav aria-label="Primary">
-      <ul>
-        {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
-      </ul>
-    </nav>
-  </header>
+  <div class="wrap">
+    <header class="bar">
+      <a class="mark" href="#top">Nikola Andreev</a>
+      <nav aria-label="Primary">
+        <a href="#tours">Tours</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-  <main id="top">
-    <section class="hero">
-      <img class="cover" src="/images/cover.jpg" alt="Nikola speaking on stage" width="2000" height="1150" />
-      <div class="scrim"></div>
-      <div class="intro">
-        <img class="portrait" src="/images/portrait.jpg" alt="" width="120" height="120" />
-        <h1>{name}</h1>
-      </div>
-    </section>
+    <main id="top">
+      <section class="hero">
+        <img
+          class="cover"
+          src="/images/cover.jpg"
+          alt="Nikola reading from notes at a microphone on stage, a flag behind him"
+          width="2000"
+          height="1150"
+        />
+        <h1>
+          <span>Nikola</span>
+          <span>Andreev</span>
+        </h1>
+        <div class="lede">
+          <img class="portrait" src="/images/portrait.jpg" alt="Portrait of Nikola at a microphone" width="892" height="892" />
+          <p>
+            I run student projects, speak on stage, and guide trips from the Arctic to the desert.
+          </p>
+        </div>
+      </section>
 
-    <section id="tours">
-      <div class="head">
-        <span class="num">01</span>
-        <h2>Tours</h2>
-      </div>
-      <p class="text">
-        I guide trips for <a href="https://abax.bg" target="_blank" rel="noopener noreferrer">ABAX.BG</a>,
-        from snowy Lapland to desert dunes. A few frames from the road.
-      </p>
-      <ul class="gallery">
-        {
-          tours.map((t) => (
-            <li class={t.cls}>
-              <img src={t.src} alt={t.alt} loading="lazy" />
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-
-    <section id="instagram">
-      <div class="head">
-        <span class="num">02</span>
-        <h2>Instagram</h2>
-      </div>
-      <p class="text">Me and the projects I'm part of, live from Instagram.</p>
-      <ul class="embeds">
-        {
-          instagram.map((i) => (
-            <li class="embed">
-              <div class="meta">
-                <div>
-                  <h3>{i.title}</h3>
-                  <p>{i.note}</p>
-                </div>
-                <a
-                  class="open"
-                  href={`https://www.instagram.com/${i.handle}/`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`Open @${i.handle} on Instagram`}
-                >
-                  @{i.handle} <span aria-hidden="true">↗</span>
-                </a>
+      <section id="tours" class="split">
+        <div class="side">
+          <h2>Tours</h2>
+          <p>
+            I guide trips for <a href="https://abax.bg" target="_blank" rel="noopener noreferrer">ABAX.BG</a>.
+            Northern lights, reindeer farms and dune rides are all part of the job.
+          </p>
+        </div>
+        <div class="photos">
+          {
+            columns.map((col) => (
+              <div class="col">
+                {col.map((p) => (
+                  <img src={p.src} alt={p.alt} width={p.w} height={p.h} loading="lazy" />
+                ))}
               </div>
-              {i.embed === false ? (
-                <a
-                  class="follow"
-                  href={`https://www.instagram.com/${i.handle}/`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span>Follow along on Instagram</span>
-                  <span aria-hidden="true">↗</span>
-                </a>
-              ) : (
+            ))
+          }
+        </div>
+      </section>
+
+      <section id="projects">
+        <div class="side wide">
+          <h2>Projects</h2>
+          <p>Clubs and ideas I'm building with other people. Live from Instagram.</p>
+        </div>
+        <ul class="embeds">
+          {
+            projects.map((p) => (
+              <li>
                 <iframe
-                  src={`https://www.instagram.com/${i.handle}/embed`}
-                  title={`Instagram profile @${i.handle}`}
+                  src={`https://www.instagram.com/${p.handle}/embed`}
+                  title={`Instagram profile @${p.handle}`}
                   loading="lazy"
                   scrolling="no"
                 />
-              )}
-            </li>
-          ))
-        }
-      </ul>
-    </section>
+                <div class="cap">
+                  <h3>{p.title}</h3>
+                  <p>{p.note}</p>
+                  <a href={`https://www.instagram.com/${p.handle}/`} target="_blank" rel="noopener noreferrer">
+                    Open @{p.handle}
+                  </a>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
 
-    <section id="contact">
-      <div class="head">
-        <span class="num">03</span>
+      <section id="contact" class="contact">
         <h2>Contact</h2>
-      </div>
-      <a class="mail" href={`mailto:${email}`}>{email}</a>
-      <ul class="links">
-        {
-          links.map((l) => (
-            <li>
-              <a href={l.href} target="_blank" rel="noopener noreferrer">
-                {l.label} <span aria-hidden="true">↗</span>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </section>
-  </main>
+        <a class="mail" href={`mailto:${email}`}>{email}</a>
+        <p class="elsewhere">
+          Also on{' '}
+          <a href="https://www.linkedin.com/in/nikola-andreev-736a5b3a3/" target="_blank" rel="noopener noreferrer">LinkedIn</a>{' '}
+          and{' '}
+          <a href="https://www.instagram.com/andreevnikolaa/" target="_blank" rel="noopener noreferrer">Instagram</a>.
+        </p>
+      </section>
+    </main>
 
-  <footer>
-    <p>© {year} {name}</p>
-    <p>Work in progress. Thanks, Claude.</p>
-  </footer>
+    <footer>
+      <p>© {year} Nikola Andreev</p>
+    </footer>
+  </div>
 </Layout>
 
 <style>
   .notice {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    padding: 0.55rem 1rem;
-    background: var(--fg);
-    color: var(--bg);
-    font-size: 0.85rem;
+    margin: 0;
+    padding: 0.5rem var(--gutter);
+    background: var(--ink);
+    color: #fff;
+    font-size: 0.875rem;
     text-align: center;
   }
-  .notice p {
-    margin: 0;
-  }
-  .notice em {
-    font-family: var(--display);
-    font-size: 1rem;
-  }
-  .dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: #f5a524;
-    flex-shrink: 0;
+  .wrap {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
   }
 
-  .top {
-    position: sticky;
-    top: 0.75rem;
-    z-index: 10;
+  .bar {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
     gap: 1rem;
-    width: fit-content;
-    min-width: min(420px, calc(100% - 2rem));
-    margin: 0.75rem auto 0;
-    padding: 0.45rem 0.55rem 0.45rem 1.1rem;
-    background: color-mix(in srgb, var(--card) 80%, transparent);
-    backdrop-filter: blur(14px) saturate(1.4);
-    border: 1px solid var(--line);
-    border-radius: 999px;
+    padding: 1.4rem 0;
   }
-  .logo {
+  .mark {
     font-family: var(--display);
     font-weight: 700;
-    letter-spacing: 0.04em;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
     text-decoration: none;
   }
-  nav ul {
+  nav {
     display: flex;
-    gap: 0.2rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    gap: clamp(1rem, 3vw, 2rem);
+    font-size: 0.95rem;
   }
   nav a {
-    display: block;
-    padding: 0.4rem 0.85rem;
-    border-radius: 999px;
-    color: var(--muted);
     text-decoration: none;
-    font-size: 0.9rem;
-    transition: background 0.15s, color 0.15s;
+    color: var(--mute);
   }
   nav a:hover {
-    background: var(--fg);
-    color: var(--bg);
+    color: var(--ink);
+    text-decoration: underline;
   }
 
-  main {
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 0 1.25rem;
-  }
   section {
-    padding: 4.5rem 0 1rem;
-    scroll-margin-top: 4.5rem;
+    padding-top: clamp(4rem, 10vw, 8rem);
+    scroll-margin-top: 1rem;
+  }
+  .hero {
+    padding-top: 0.5rem;
   }
 
-  .hero {
-    position: relative;
-    margin-top: -3rem;
-    padding: 0;
-    border-radius: var(--radius);
-    overflow: hidden;
-    min-height: clamp(360px, 62vh, 620px);
-    display: flex;
-    align-items: flex-end;
-    background: #000;
-  }
   .cover {
-    position: absolute;
-    inset: 0;
     width: 100%;
-    height: 100%;
+    height: clamp(260px, 56vh, 560px);
     object-fit: cover;
-    object-position: center 35%;
+    object-position: 50% 62%;
+    border-radius: 14px;
   }
-  .scrim {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to top, rgb(0 0 0 / 0.78), rgb(0 0 0 / 0) 60%);
+  h1 {
+    display: flex;
+    flex-direction: column;
+    margin: clamp(1.5rem, 4vw, 3rem) 0 0;
+    font-family: var(--display);
+    font-weight: 800;
+    font-size: clamp(4rem, 17.5vw, 13.5rem);
+    line-height: 0.84;
+    letter-spacing: -0.045em;
   }
-  .intro {
-    position: relative;
+  .lede {
     display: flex;
     align-items: center;
     gap: 1.1rem;
-    padding: clamp(1.25rem, 4vw, 2.5rem);
-    color: #fff;
+    max-width: 34rem;
+    margin-top: clamp(1.5rem, 3vw, 2.5rem);
   }
   .portrait {
-    width: clamp(60px, 9vw, 84px);
-    aspect-ratio: 1;
+    width: 4.25rem;
+    height: 4.25rem;
+    flex-shrink: 0;
     border-radius: 50%;
     object-fit: cover;
-    object-position: center 22%;
-    border: 2px solid rgb(255 255 255 / 0.85);
+    object-position: 50% 25%;
   }
-  h1 {
-    font-family: var(--display);
-    font-weight: 500;
-    font-size: clamp(2.2rem, 7vw, 4.5rem);
-    line-height: 1;
-    letter-spacing: -0.02em;
+  .lede p {
     margin: 0;
+    font-size: 1.25rem;
+    line-height: 1.4;
   }
 
-  .head {
-    display: flex;
-    align-items: baseline;
-    gap: 0.9rem;
-    margin-bottom: 0.75rem;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--line);
-  }
-  .num {
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-  }
   h2 {
+    margin: 0 0 1rem;
     font-family: var(--display);
-    font-weight: 500;
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    letter-spacing: -0.015em;
-    line-height: 1.1;
+    font-weight: 700;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.03em;
+  }
+  .side p {
     margin: 0;
+    max-width: 26rem;
+    color: var(--mute);
   }
-  .text {
-    max-width: 34rem;
-    margin: 0 0 2rem;
-    color: var(--muted);
-    font-size: 1.05rem;
+  .side a {
+    color: var(--ink);
   }
-  .text a {
-    color: var(--fg);
+  .side.wide {
+    margin-bottom: 2.5rem;
   }
 
-  .gallery,
-  .embeds,
-  .links {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .gallery {
+  .split {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 0.9rem;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
   }
-  .gallery li {
-    border-radius: 16px;
-    overflow: hidden;
-    background: var(--line);
+  .split .side {
+    position: sticky;
+    top: 2rem;
   }
-  .gallery .wide {
-    grid-column: span 3;
-    aspect-ratio: 4 / 3;
+  .photos {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.85rem;
+    align-items: start;
   }
-  .gallery .tall {
-    grid-column: span 3;
-    aspect-ratio: 4 / 3;
+  .col {
+    display: grid;
+    gap: 0.85rem;
   }
-  .gallery img {
+  .col:last-child {
+    margin-top: 3.5rem;
+  }
+  .photos img {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1);
-  }
-  .gallery li:hover img {
-    transform: scale(1.03);
-  }
-  .gallery .tall img {
-    object-position: center 30%;
+    height: auto;
+    border-radius: 10px;
   }
 
   .embeds {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.1rem;
-  }
-  .embed {
-    display: flex;
-    flex-direction: column;
-    background: var(--card);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    overflow: hidden;
-  }
-  .meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 1rem;
-    padding: 1.1rem 1.25rem;
-  }
-  .meta h3 {
-    font-family: var(--display);
-    font-weight: 500;
-    font-size: 1.3rem;
-    line-height: 1.2;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(1rem, 2.5vw, 2rem);
+    list-style: none;
     margin: 0;
-  }
-  .meta p {
-    margin: 0.2rem 0 0;
-    font-size: 0.92rem;
-    color: var(--muted);
-  }
-  .open {
-    flex-shrink: 0;
-    padding: 0.35rem 0.8rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    font-size: 0.82rem;
-    text-decoration: none;
-    transition: background 0.15s, color 0.15s;
-  }
-  .open:hover {
-    background: var(--fg);
-    color: var(--bg);
+    padding: 0;
   }
   iframe {
     width: 100%;
-    height: 560px;
-    border: 0;
-    border-top: 1px solid var(--line);
+    height: 415px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
     background: #fff;
     display: block;
   }
-
-  .follow {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    min-height: 200px;
-    border-top: 1px solid var(--line);
-    background: linear-gradient(135deg, #f3e9dc, #e9eef2);
-    font-family: var(--display);
-    font-size: 1.4rem;
-    text-decoration: none;
+  .cap {
+    padding-top: 1rem;
   }
-  .follow:hover {
-    text-decoration: underline;
-    text-underline-offset: 5px;
+  .cap h3 {
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 700;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .cap p {
+    margin: 0.2rem 0 0.5rem;
+    color: var(--mute);
+    font-size: 0.97rem;
+  }
+  .cap a {
+    font-size: 0.95rem;
+    overflow-wrap: anywhere;
+  }
+
+  .contact {
+    padding-bottom: 1rem;
   }
   .mail {
     display: inline-block;
     font-family: var(--display);
-    font-size: clamp(1.5rem, 5vw, 2.8rem);
-    letter-spacing: -0.015em;
-    text-decoration-thickness: 1px;
-    margin-bottom: 1.25rem;
+    font-weight: 700;
+    font-size: clamp(1.6rem, 6.2vw, 4.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    text-decoration: none;
+    border-bottom: 3px solid var(--ink);
     overflow-wrap: anywhere;
   }
-  .links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
+  .mail:hover {
+    border-color: var(--red);
   }
-  .links a {
-    display: inline-block;
-    padding: 0.5rem 1.05rem;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: var(--card);
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: background 0.15s, color 0.15s;
+  .elsewhere {
+    margin: 1.5rem 0 0;
+    color: var(--mute);
   }
-  .links a:hover {
-    background: var(--fg);
-    color: var(--bg);
+  .elsewhere a {
+    color: var(--ink);
   }
 
   footer {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    max-width: 1080px;
-    margin: 4rem auto 0;
-    padding: 1.5rem 1.25rem 3rem;
+    margin-top: clamp(4rem, 10vw, 8rem);
+    padding: 1.5rem 0 2.5rem;
     border-top: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 0.88rem;
+    color: var(--mute);
+    font-size: 0.9rem;
   }
   footer p {
     margin: 0;
   }
 
-  @media (max-width: 760px) {
+  @media (max-width: 900px) {
     .embeds {
       grid-template-columns: 1fr;
+      max-width: 440px;
     }
-    .gallery .wide,
-    .gallery .tall {
-      grid-column: span 6;
+  }
+  @media (max-width: 720px) {
+    .split {
+      grid-template-columns: 1fr;
     }
-    .meta {
-      flex-direction: column;
+    .split .side {
+      position: static;
     }
-    nav a {
-      padding: 0.4rem 0.6rem;
+    .lede p {
+      font-size: 1.1rem;
     }
   }
   @media (prefers-reduced-motion: reduce) {
-    .gallery img {
-      transition: none;
-    }
-    .gallery li:hover img {
-      transform: none;
+    html {
+      scroll-behavior: auto;
     }
   }
 </style>

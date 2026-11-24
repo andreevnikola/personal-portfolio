@@ -1,4 +1,7 @@
 ---
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource-variable/instrument-sans';
+
 interface Props {
   title: string;
   description: string;
@@ -13,9 +16,11 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#edf0f2" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
+    <meta property="og:image" content="/images/cover.jpg" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
   </head>
@@ -26,15 +31,15 @@ const { title, description } = Astro.props;
 
 <style is:global>
   :root {
-    --bg: #f5f4f0;
-    --fg: #121212;
-    --muted: #6a6a64;
-    --line: #e1dfd8;
-    --card: #ffffff;
-    --accent: #121212;
-    --radius: 22px;
-    --display: ui-serif, 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
-    --sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --frost: #edf0f2;
+    --ink: #0e1b2c;
+    --mute: #5b6877;
+    --line: rgb(14 27 44 / 0.14);
+    --red: #c2372b;
+    --display: 'Bricolage Grotesque Variable', 'Helvetica Neue', Arial, sans-serif;
+    --body: 'Instrument Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --gutter: clamp(1.25rem, 4vw, 3rem);
+    --max: 1240px;
   }
   * {
     box-sizing: border-box;
@@ -45,22 +50,31 @@ const { title, description } = Astro.props;
   }
   body {
     margin: 0;
-    background: var(--bg);
-    color: var(--fg);
-    font-family: var(--sans);
+    background: var(--frost);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 1.0625rem;
     line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
+  img {
+    max-width: 100%;
+    display: block;
+  }
   a {
     color: inherit;
-    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+  }
+  a:hover {
+    color: var(--red);
   }
   :focus-visible {
-    outline: 2px solid var(--fg);
+    outline: 2px solid var(--red);
     outline-offset: 3px;
   }
   ::selection {
-    background: var(--fg);
-    color: var(--bg);
+    background: var(--red);
+    color: #fff;
   }
 </style>
